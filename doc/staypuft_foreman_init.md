@@ -59,9 +59,9 @@ For customization user could set any parameter (only if based on kafo) and hook 
 
 Example:
 
-    stapuft-installer                             # would try to detect and creating everything automatically
-    stapuft-installer --subnet='192.168.123.0/24' # modify particular parameter
-    stapuft-installer --interactive               # allow user to modify any parameter using wizard however pre hooks are executed before wizard, so default subnets would be created unless user specified some params alongside with --interactive option
+    staypuft-installer                             # would try to detect and creating everything automatically
+    staypuft-installer --subnet='192.168.123.0/24' # modify particular parameter
+    staypuft-installer --interactive               # allow user to modify any parameter using wizard however pre hooks are executed before wizard, so default subnets would be created unless user specified some params alongside with --interactive option
 
 ## Option B - enhanced foreman_setup
 
