@@ -4,7 +4,7 @@
 
 * automatic setup with minimal user interaction (max 1 answer whether he wants automatic setup or advanced configuration wizard)
 * wizard must be easy to use for people who don't know foreman
-* it must be possile to run in advanced mode (post April) to customize all values
+* it must be possible to run in advanced mode (post April) to customize all values
 * it should be easy to change configuration after initial setup
 * must work disconnected
 
@@ -18,11 +18,15 @@
   * based on machine domain
   * do we need to allow using other domain (post April)
 * DHCP, DNS, TFTP parameters (based on Subnet and Domain)
+  * DHCP proxy is optional if user has set next-server/filename on existing DHCP server
+  * DNS proxy is optional
+  * TFTP proxy is optional if using bootdisk
 * Operatingsystem
   * can we assume latest released RHEL only?
   * should be the same as on provisioning machine
-* Provisioning template
+* Provisioning templates
   * should be default, we just have to link with OS
+  * PXELinux, provision, iPXE (bootdisk)
 * Parition table
   * should be default, we just have to link with OS
 * Installation media*
@@ -59,9 +63,9 @@ For customization user could set any parameter (only if based on kafo) and hook 
 
 Example:
 
-    stapuft-installer                             # would try to detect and creating everything automatically
-    stapuft-installer --subnet='192.168.123.0/24' # modify particular parameter
-    stapuft-installer --interactive               # allow user to modify any parameter using wizard however pre hooks are executed before wizard, so default subnets would be created unless user specified some params alongside with --interactive option
+    staypuft-installer                             # would try to detect and creating everything automatically
+    staypuft-installer --subnet='192.168.123.0/24' # modify particular parameter
+    staypuft-installer --interactive               # allow user to modify any parameter using wizard however pre hooks are executed before wizard, so default subnets would be created unless user specified some params alongside with --interactive option
 
 ## Option B - enhanced foreman_setup
 
@@ -91,7 +95,7 @@ This command is generated to configure foreman provisioning with DHCP
       --foreman-proxy-oauth-consumer-secret=GwegrCMvrShqsmuMx9ZHDm7PoaszoRaX
 
 
-### Ehanced foreman_setup workflow
+### Enhanced foreman_setup workflow
 
 Foreman would not allow to use UI without answering question "Do you want to setup default provisioning or you prefer advanced configuration wizard". If user choose default provisioning, all foreman_steps should be done automatically.
 
@@ -104,6 +108,7 @@ It would (using dynflow to maintain order):
 4. create subnet, uses name "default", all other is generated based on step 2
 5. runs installer again with command generated (view _step3.html.erb in foreman_setup), preferably by any puppetrun method (for April, running shell on same machine should be enough)
 6. we should provide installation media on provisioning machine so it could work without internet access, therefore we can setup this installation media (I suppose we can install just RHEL here?)
+  * easier said than done... you might need the RHEL ISO as an input
 
 User still can choose not to use default provisioning and use foreman_setup as they do now.
 
@@ -112,6 +117,7 @@ User still can choose not to use default provisioning and use foreman_setup as t
 \+ We have JS and other web goodies to make advanced form easy to use<br />
 \+ We could use dynflow to model workflow<br />
 \+ With orchestration and SSH setup it could trigger configration on remote foreman-proxy (is this needed?)<br />
+\+ Matches Foreman project direction, which will include and recommend foreman_setup in default install<br />
 \- Would have to run commands under root user<br />
 \- Foreman must be already running, which could possibly cause some troubles (foreman listens on wrong device)<br />
 \- Would have to run installer at least once again<br />
@@ -124,7 +130,7 @@ Or we could just predefine all required things and setup provisioning services a
 
 ## Option C - seed (rake task as a part of installation)
 
-Probably not going to happen, I just wanted to mention it
+Probably not going to happen, I just wanted to mention it.  This is the current astapor implementation.
 
 \+ Easy to rerun from WebUI programatically if needed<br />
 \- Hard to allow customization, it would create something that user has to remove/modify later in WebUI<br />
