@@ -34,13 +34,13 @@
 
 ### Installer workflow
 
-I suppose we can run arbitrary script before or after foreman installation (using puppet-foreman* modules). Also these scripts should be able to share some values easily. I'm sure we can do this with kafo and it should be easy even with existing foreman_server.sh in Astapor.
+I suppose we can run arbitrary script before or after foreman installation (using puppet-foreman* modules). Also these scripts should be able to share some values easily. I'm sure we can do this with kafo and it should be easy even with existing foreman_server.sh in Astapor. For April version we use simple scrapt wrapping foreman-installer and API calls will be hardcoded there. Later it should be easy enough to build staypuft-installer based solely on kafo a reuse these scripts in it.
 
 1. installer is ran without any specific parameters
 2. kafo 'pre hook' (or just simply script) creates new network, see step2 in OptionB for more details
 3. same hook configures all values for DNS/DHCP parameters (see OptionB example for the list) based on $this machine environment and network it created in step 2
 4. runs installation which setup DNS/DHCP/TFTP and foreman itself
-5. kafo 'post hook' (or another script for Astapor installer) creates and assigns all models in foreman using foreman API, which basically duplicates foreman_setup logic
+5. kafo 'post hook' (or another script for April installer) creates and assigns all models in foreman using foreman API, which basically duplicates foreman_setup logic
 
 For customization user could set any parameter (only if based on kafo) and hook from step 2 would first check whether user wants some explicit value or hook should generate it.
 
