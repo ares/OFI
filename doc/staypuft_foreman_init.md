@@ -87,8 +87,6 @@ This command is generated to configure foreman provisioning with DHCP
       --foreman-proxy-dns-forwarders=192.168.122.1 \
       --foreman-proxy-dns-forwarders=192.168.122.2 \
       --foreman-proxy-foreman-base-url=https://test2.example.com \
-      --foreman-proxy-oauth-consumer-key=z7zPMKXCACWtne4hE4xfmALnjvMzryPe \
-      --foreman-proxy-oauth-consumer-secret=GwegrCMvrShqsmuMx9ZHDm7PoaszoRaX
 
 
 ### Ehanced foreman_setup workflow
