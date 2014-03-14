@@ -78,7 +78,7 @@ This command is generated to configure foreman provisioning with DHCP
       --foreman-proxy-dhcp=true \
       --foreman-proxy-dhcp-interface=eth0 \
       --foreman-proxy-dhcp-gateway=192.168.122.1 \
-      --foreman-proxy-dhcp-range=" " \
+      --foreman-proxy-dhcp-range="192.168.122.103 192.168.122.255 " \
       --foreman-proxy-dhcp-nameservers="192.168.122.102" \
       --foreman-proxy-dns=true \
       --foreman-proxy-dns-interface=eth0 \
