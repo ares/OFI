@@ -195,12 +195,21 @@ $(function () {
   var assigned_host_checkboxes = $('#assigned-hosts table input:checkbox');
   assigned_host_checkboxes.click(function(){
     $("#unassign_hosts_button").attr("disabled", !assigned_host_checkboxes.is(":checked"));
+    $("#configure_networks_button").attr("disabled", !assigned_host_checkboxes.is(":checked"));
   });
 
   var deployed_host_checkboxes = $('#deployed-hosts table input:checkbox');
   deployed_host_checkboxes.click(function(){
     $("#undeploy_hosts_modal").attr("disabled", !deployed_host_checkboxes.is(":checked"));
   });
+
+
+  $('.dynamic-submit').click(function() {
+    this.form.action = $(this).data('submit-to');
+    this.form.method = $(this).data('method');
+    this.form.submit();
+    return false;
+  })
 
 
 });
