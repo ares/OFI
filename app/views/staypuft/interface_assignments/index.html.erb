@@ -21,23 +21,13 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" id='network-interfaces'>
   <div class="col-md-12">
-    <h3><%= _("Network Interfaces") %></h3>
-    <% if (subnet = @host.subnet) %>
-      <%= render 'staypuft/interfaces/drop_zone',
-                 :identifier => @host.primary_interface,
-                 :subnet => subnet,
-                 :deployment => @deployment,
-                 :host => @host %>
-    <% end %>
-
-    <% @interfaces.each do |interface| %>
-      <%= render 'staypuft/interfaces/drop_zone',
-                 :identifier => interface.identifier,
-                 :subnet => interface.subnet,
-                 :deployment => @deployment,
-                 :host => @host %>
-    <% end %>
+    <%= render 'staypuft/interface_assignments/interfaces',
+               :host => @host,
+               :hosts => @hosts,
+               :deployment => @deployment,
+               :interface => @interface,
+               :interfaces => @interfaces %>
   </div>
 </div>
